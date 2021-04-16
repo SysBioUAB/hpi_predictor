@@ -5,6 +5,8 @@
 
 ### Please, install: Zenity, R and blast
 
-### Download dataset/ and database/ directories from Zenodo (private mode for now). Unzip the files.
+### Download dataset/ and database/ directories from Zenodo (private mode for now).
+#### https://zenodo.org/record/4668840#.YHm-B-0zYVs
+#### Unzip the files.
 
 ### Go to script/ directory and run ./main_script.bash
