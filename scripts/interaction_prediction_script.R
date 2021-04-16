@@ -242,7 +242,7 @@ start_time <- Sys.time()
         end_time <- Sys.time()
         print(end_time - start_time)
     } else {
-        cat(sprint("Descriptor already in host database"))
+        cat(sprintf("Descriptor already in host database"))
     }
 
 }
@@ -295,7 +295,7 @@ for (i in 1:length(descriptors_vec)){
     }
 }
 
-cat(sprintf("Done!")
+cat(sprintf("Done!"))
 end_time <- Sys.time()
 print(end_time - start_time)
 
