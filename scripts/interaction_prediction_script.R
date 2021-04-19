@@ -222,7 +222,7 @@ start_time <- Sys.time()
         end_time <- Sys.time()
         print(end_time - start_time)
     } else {
-        cat(sprint("Descriptor already in pathogen database"))
+        cat(sprintf("Descriptor already in pathogen database"))
     }
 
     start_time <- Sys.time()
