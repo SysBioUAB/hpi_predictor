@@ -143,7 +143,7 @@ for(i in 1:length(descriptors_vec)){
         p.learn.index[[i]] <- calculation
         print(helper_r_i_p)
         write.table(calculation, helper_r_i_p, sep = "\t", row.names = FALSE, quote = FALSE)       
-        print("Done!")
+        cat(sprintf("Done!"))
         end_time <- Sys.time()
         print(end_time - start_time)
     } else {
@@ -165,7 +165,7 @@ for(i in 1:length(descriptors_vec)){
         calculation <- lapply(1:length(calculation), function(x){c(unlist(calculation[x]), rep(0, 4096-length(unlist(calculation[x]))))})
         h.learn.index[[i]] <- calculation
         write.table(calculation, helper_r_i_h, sep = "\t", row.names = FALSE, quote = FALSE)
-        print("Done!")
+        cat(sprintf("Done!"))
         rm(calculation); gc()
         end_time <- Sys.time()
         print(end_time - start_time)
@@ -295,7 +295,7 @@ for (i in 1:length(descriptors_vec)){
     }
 }
 
-cat(sprintf("Done!")
+cat(sprintf("Done!"))
 end_time <- Sys.time()
 print(end_time - start_time)
 
