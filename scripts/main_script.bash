@@ -34,6 +34,7 @@
     interactome_subdirs="${result_dir}"temp_file_subdir
 	declare -a organisms_user=()
 
+
 # Ask user to choose host and pathogen # 
 
 for i in {0..1}; do
@@ -482,7 +483,7 @@ final_interactome_IDs_file=$(sed 's/\.tsv$/_help_file_with_IDS.tsv/' <<< "$inter
 
 #######
 
-Rscript "$script_dir"/integrate_databases_copy.R "$intermediate_files"host_vs_dualseq_values.tsv "$intermediate_files"bacteria_vs_dualseq_values.tsv "$intermediate_files"bacteria_vs_bacfitbase_values.tsv  "$intermediate_files"bacteria_vs_phi_base_values.tsv "$hi_centrality_name" "$interactome" "$final_interactome_raw_file" "$final_interactome_with_scores" "$final_interactome_log2fc_file" "$final_interactome_IDs_file"
+Rscript "$script_dir"/integrate_databases_copy.R "$intermediate_files"host_vs_dualseq_values.tsv "$intermediate_files"bacteria_vs_dualseq_values.tsv "$intermediate_files"bacteria_vs_bacfitbase_values.tsv  "$intermediate_files"bacteria_vs_phi_base_values.tsv "$databases_dir""$hi_centrality_name" "$interactome" "$final_interactome_raw_file" "$final_interactome_with_scores" "$final_interactome_log2fc_file" "$final_interactome_IDs_file"
 
 #Rscript "$script_dir"/integrate_databases_copy.R "$host"_vs_"$pathogen"_predicted_interactome_false_positives_"$falsepos_var"_by_"$consensus_predictors"_percent_of_predictors_host_dualseq_values.tsv "$host"_vs_"$pathogen"_predicted_interactome_false_positives_"$falsepos_var"_by_"$consensus_predictors"_percent_of_predictors_bac_dualseq_values.tsv "$host"_vs_"$pathogen"_predicted_interactome_false_positives_"$falsepos_var"_by_"$consensus_predictors"_percent_of_predictors_bac_values.tsv "$host"_vs_"$pathogen"_predicted_interactome_false_positives_"$falsepos_var"_by_"$consensus_predictors"_percent_of_predictors_phi_base_values.tsv "$hi_centrality_name" "$interactome" "$final_interactome_raw_file"  "$final_interactome_with_scores" "$final_interactome_log2fc_file" "$final_interactome_IDs_file"
 

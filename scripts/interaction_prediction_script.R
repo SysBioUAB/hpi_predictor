@@ -2,7 +2,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 setwd(args[9])
 
-pkg <- c("plyr", "tidyverse", "bio3d", "readxl", "stringi", "e1071", "progress", "data.table", "parallel", "Biostrings")
+pkg <- c("plyr", "tidyverse", "bio3d", "readxl", "stringi", "e1071", "progress", "data.table", "parallel", "Biostrings", "crayon")
 # Install packages not yet installed
 installed_packages <- pkg %in% rownames(installed.packages())
 if (any(installed_packages == FALSE)) {
@@ -31,7 +31,7 @@ euc.dist <- function(v1,v2){
 
 cores=detectCores()
 cat(sprintf("%s CPU cores detected, using %s\n", cores, cores-1))
-
+cat(red(sprintf("Building the pathogen reference database\n")))
 ######################################
 
 #############################
@@ -73,7 +73,7 @@ for(i in 1:length(descriptors_vec)){
     helper_r_i_h <- paste(pos_inter_dir, "host/", descriptors_vec[i], "_host.tsv", sep = "")
     helper_r_i_p <- paste(pos_inter_dir, "pathogen/", descriptors_vec[i], "_pathogen.tsv", sep = "")
     if (file.exists(helper_r_i_p) == FALSE){
-        cat(sprintf("Building the pathogen reference database\n"))
+        cat(red(sprintf("Building the pathogen reference database\n")))
 
         max.val <- max(aa.index[[descriptors_vec[i]]]$I)
         min.val <- min(aa.index[[descriptors_vec[i]]]$I)
@@ -89,13 +89,13 @@ for(i in 1:length(descriptors_vec)){
         print(end_time - start_time)
     } else {
 
-        cat(sprintf("Retrieving %s from pathogen database\n", descriptors_vec[[i]]))
+        cat(red(sprintf("Retrieving %s from pathogen database\n", descriptors_vec[[i]])))
         p.learn.index[[i]] <- read.delim(helper_r_i_p)
     }
 
     start_time <- Sys.time()
     if (file.exists(helper_r_i_h) == FALSE){
-        cat(sprintf("Building the host reference database\n"))
+        cat(blue(sprintf("Building the host reference database\n")))
 
         max.val <- max(aa.index[[descriptors_vec[i]]]$I)
         min.val <- min(aa.index[[descriptors_vec[i]]]$I)
@@ -111,7 +111,7 @@ for(i in 1:length(descriptors_vec)){
         print(end_time - start_time)
     } else {
 
-        cat(sprintf("Retrieving %s from host database\n", descriptors_vec[[i]]))
+        cat(blue(sprintf("Retrieving %s from host database\n", descriptors_vec[[i]])))
         h.learn.index[[i]] <- read.delim(helper_r_i_h)
     }
 
@@ -143,7 +143,7 @@ start_time <- Sys.time()
 
   helper_i_p <- paste(pathogen_dir, pathogen_org, "/descriptors/p_results_lagmax_", lagmax, "_cutoff_", cutoff_h, "_",  descriptors_vec[i], ".txt", sep = "")
     if (file.exists(helper_i_p) == FALSE){
-        cat(sprintf("Building the pathogen proteome database\n"))
+        cat(red(sprintf("Building the pathogen proteome database\n")))
 
         calculation <- lapply(1:length(unlist(p.proteome$P_seq)), function(x){aa2index(aa = as.vector(stri_list2matrix(str_extract_all(p.proteome$P_seq[x], boundary("character")), byrow = TRUE)), index = descriptors_vec[i], window = 9)})
         calculation <- lapply(1:length(calculation), function(x){unlist(calculation[x])-mean(unlist(calculation[x]))})
@@ -156,13 +156,13 @@ start_time <- Sys.time()
         end_time <- Sys.time()
         print(end_time - start_time)
     } else {
-        cat(sprintf("Descriptor already in pathogen database\n"))
+        cat(red(sprintf("Descriptor already in pathogen database\n")))
     }
 
     start_time <- Sys.time()
     helper_i_h <- paste(host_dir, host_org, "/descriptors/h_results_lagmax_", lagmax, "_cutoff_", cutoff_h, "_", descriptors_vec[i], ".txt", sep = "")
     if (file.exists(helper_i_h) == FALSE){
-        cat(sprintf("Building the host proteome database\n"))
+        cat(blue(sprintf("Building the host proteome database\n")))
         print(helper_i_h)
         calculation <- lapply(1:length(unlist(h.proteome$H_seq)), function(x){aa2index(aa = as.vector(stri_list2matrix(str_extract_all(h.proteome$H_seq[x], boundary("character")), byrow = TRUE)), index = descriptors_vec[i], window = 9)})
         calculation <- lapply(1:length(calculation), function(x){unlist(calculation[x])-mean(unlist(calculation[x]))})
@@ -175,7 +175,7 @@ start_time <- Sys.time()
         end_time <- Sys.time()
         print(end_time - start_time)
     } else {
-        cat(sprintf("Descriptor already in host database\n"))
+        cat(blue(sprintf("Descriptor already in host database\n")))
     }
 
 }
@@ -194,7 +194,7 @@ for (i in 1:length(descriptors_vec)){
     helper_i_p <- paste(pathogen_dir, pathogen_org, "/descriptors/p_results_lagmax_", lagmax, "_cutoff_", cutoff_h, "_",  descriptors_vec[i], ".txt", sep = "")
     if (file.exists(helper_i_p) == FALSE){
 #        print("Calculating the pathogen similarity profiles")
-        cat(sprintf("Calculating the pathogen similarity profiles for descriptor %s \n", descriptors_vec[[i]]))
+        cat(red(sprintf("Calculating the pathogen similarity profiles for descriptor %s \n", descriptors_vec[[i]])))
         p.matrix <- data.table()
 #pb <- progress_bar$new(total = length(p.proteome.index[[i]]))
 
@@ -222,7 +222,7 @@ for (i in 1:length(descriptors_vec)){
         rm(p.matrix); gc()
     } else {
 
-        cat(sprintf("Profile similarity of %s in pathogen already in database \n", descriptors_vec[[i]]))
+        cat(red(sprintf("Profile similarity of %s in pathogen already in database \n", descriptors_vec[[i]])))
     }
 }
 
@@ -239,7 +239,7 @@ for (i in 1:length(descriptors_vec)){
     helper_i_h <- paste(host_dir, host_org, "/descriptors/h_results_lagmax_", lagmax, "_cutoff_", cutoff_h, "_", descriptors_vec[i], ".txt", sep = "")
     if (file.exists(helper_i_h) == FALSE){
 
-        cat(sprintf("Calculating the host similarity profiles for descriptor %s \n", descriptors_vec[[i]]))
+        cat(blue(sprintf("Calculating the host similarity profiles for descriptor %s \n", descriptors_vec[[i]])))
         h.matrix <- data.table()
 #pb <- progress_bar$new(total = length(h.proteome.index[[i]]))
         total <- length(h.proteome.index[[i]])
@@ -265,7 +265,7 @@ for (i in 1:length(descriptors_vec)){
         write.table(h.matrix, helper_i_h, quote = FALSE, sep = "\t")
         rm(h.matrix); gc()
     } else {
-        cat(sprintf("Profile similarity of %s in host already in database \n", descriptors_vec[[i]]))
+        cat(blue(sprintf("Profile similarity of %s in host already in database \n", descriptors_vec[[i]])))
     }
 }
 cat(sprintf("Done!"))
