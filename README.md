@@ -51,7 +51,3 @@ After this, Zenity interface will be prompted and the user will be asked to choo
 ### LICENSE
 
 ...Under construction...
-
-
-
-
