@@ -1,4 +1,4 @@
-# HOST-PATHOGEN PROTEIN-PROTEIN INTERACTION PREDICTOR 
+# HOST-PATHOGEN PROTEIN-PROTEIN INTERACTION PREDICTOR (HPIPred)
 This tool allows for the prediction of putative host-pathogen protein-protein interactions based on numerical encoding of physicochemical descriptors
 
 
@@ -19,7 +19,14 @@ Install Zenity: ```bash sudo apt install zenity ```
 
 ##### MacOS:
 
-...Under construction...
+To install blast locally follow the instructions in: https://www.ncbi.nlm.nih.gov/books/NBK52640/
+
+Install R package in: https://cran.r-project.org/bin/macosx/
+
+Install Zenity*: brew install zenity
+
+* Please note that you need homebrew installed in your computer. To install homebrew for mac follow the instructions in: https://brew.sh
+
 
 #### Installation
 
