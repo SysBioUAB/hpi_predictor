@@ -48,13 +48,6 @@ After this, Zenity interface will be prompted and the user will be asked to choo
 4) The False discovery rate (this is a measure of astringency, the lower the chosen value, the more astringent the analysis will be)
 5) The percentage of physicochemical models that have to agree on a prediction in order to report it in the consensus interactome
 
-
-
-### AUTHORS/CONTRIBUTORS
-
-...Under construction...
-
-
 ### LICENSE
 
-...Under construction...
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
